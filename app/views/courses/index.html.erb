@@ -1,27 +1,135 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2><b>Cursos</b></h2>
+        </div>
+        <div class="col-sm-6 group-btn-title">
+          <a href="#addCourseModal" class="btn btn-success btn-title" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Criar</span></a>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @courses.each do |course| %>
+        <tr>
+          <td>
+            <%= course.id %>
+          </td>
+          <td>
+            <%= course.title %>
+          </td>
+          <td>
+            <a class="edit" data-toggle="modal" onclick="editCourse(<%= course.id %>,'<%= course.title %>')"><i class="material-icons" data-toggle="tooltip" title="Editar" data-original-title="Editar">&#xE254;</i></a>
+            <a class="delete" data-toggle="modal" onclick="deleteCourse(<%= course.id %>)"><i class="material-icons" data-toggle="tooltip" title="Deletar" data-original-title="Deletar">&#xE872;</i></a>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="clearfix">
+      <div class="hint-text">Mostrando <b>5</b> de <b>25</b> resultados</div>
+      <ul class="pagination">
+        <li class="page-item disabled"><a href="#">Anterior</a></li>
+        <li class="page-item"><a href="#" class="page-link">1</a></li>
+        <li class="page-item"><a href="#" class="page-link">2</a></li>
+        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+        <li class="page-item"><a href="#" class="page-link">4</a></li>
+        <li class="page-item"><a href="#" class="page-link">5</a></li>
+        <li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-<h1>Courses</h1>
+<div id="addCourseModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="/courses" method="post">
+        <div class="modal-header">            
+          <h4 class="modal-title">Adicionar Instituição</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">          
+          <div class="form-group">
+            <label for="addCourseTitle">Nome</label>
+            <input id="addCourseTitle" name="course[title]" type="text" class="form-control" required>
+          </div>          
+        </div>
+        <div class="modal-footer">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+          <input name="commit" type="submit" class="btn btn-success" value="Adicionar">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div id="deleteCourseModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="delete-form" action="" method="post">
+        <div class="modal-header">            
+          <h4 class="modal-title">Deletar Instituição</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">          
+          <p>Você tem certeza que deseja deletar?</p>
+          <p class="text-warning"><small>Essa ação não pode ser desfeita.</small></p>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" name="_method" value="delete">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+          <input name="commit" type="submit" class="btn btn-danger" value="Deletar">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.title %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="editCourseModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="edit-form" action="" method="post">
+        <div class="modal-header">            
+          <h4 class="modal-title">Editar Instituição</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">          
+          <div class="form-group">
+            <label for="editCourseTitle">Name</label>
+            <input id="editCourseTitle" name="course[title]" type="text" class="form-control" required>
+          </div>         
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" name="_method" value="patch">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+          <input name="commit" type="submit" class="btn btn-info" value="Salvar">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>  
 
-<br>
-
-<%= link_to 'New Course', new_course_path %>
+  <script>
+    function deleteCourse(id) {
+      $("#delete-form").attr('action', '/courses/' + id );
+      $('#deleteCourseModal').modal('toggle');
+    }
+    function editCourse(id,title) {
+      $("#edit-form").attr('action', '/courses/' + id );
+      $("#editCourseTitle").val( title );
+      $('#editCourseModal').modal('toggle');
+    }
+  </script>
