@@ -15,6 +15,8 @@
         <tr>
           <th>#</th>
           <th>Nome</th>
+          <th>Instituição</th>
+          <th>Nota</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -28,7 +30,13 @@
             <%= course.title %>
           </td>
           <td>
-            <a class="edit" data-toggle="modal" onclick="editCourse(<%= course.id %>,'<%= course.title %>')"><i class="material-icons" data-toggle="tooltip" title="Editar" data-original-title="Editar">&#xE254;</i></a>
+            <%= course.institution_id %>
+          </td>
+          <td>
+            <%= course.grade %>
+          </td>
+          <td>
+            <a class="edit" data-toggle="modal" onclick="editCourse(<%= course.id %>,'<%= course.title %>', <%= course.institution_id %>, <%= course.grade %>)"><i class="material-icons" data-toggle="tooltip" title="Editar" data-original-title="Editar">&#xE254;</i></a>
             <a class="delete" data-toggle="modal" onclick="deleteCourse(<%= course.id %>)"><i class="material-icons" data-toggle="tooltip" title="Deletar" data-original-title="Deletar">&#xE872;</i></a>
           </td>
         </tr>
@@ -55,14 +63,22 @@
     <div class="modal-content">
       <form action="/courses" method="post">
         <div class="modal-header">            
-          <h4 class="modal-title">Adicionar Instituição</h4>
+          <h4 class="modal-title">Adicionar Curso</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">          
           <div class="form-group">
             <label for="addCourseTitle">Nome</label>
             <input id="addCourseTitle" name="course[title]" type="text" class="form-control" required>
-          </div>          
+          </div>     
+          <div class="form-group">
+            <label for="addCourseInstitutionId">Instituição</label>
+            <input id="addCourseInstitutionId" name="course[institution_id]" type="text" class="form-control" required>
+          </div>  
+          <div class="form-group">
+            <label for="addCourseGrade">Nota</label>
+            <input id="addCourseGrade" name="course[grade]" type="text" class="form-control" required>
+          </div>       
         </div>
         <div class="modal-footer">
           <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -79,7 +95,7 @@
     <div class="modal-content">
       <form id="delete-form" action="" method="post">
         <div class="modal-header">            
-          <h4 class="modal-title">Deletar Instituição</h4>
+          <h4 class="modal-title">Deletar Curso</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">          
@@ -102,14 +118,22 @@
     <div class="modal-content">
       <form id="edit-form" action="" method="post">
         <div class="modal-header">            
-          <h4 class="modal-title">Editar Instituição</h4>
+          <h4 class="modal-title">Editar Curso</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">          
           <div class="form-group">
             <label for="editCourseTitle">Name</label>
             <input id="editCourseTitle" name="course[title]" type="text" class="form-control" required>
-          </div>         
+          </div> 
+          <div class="form-group">
+            <label for="editCourseInstitutionId">Instituição</label>
+            <input id="editCourseInstitutionId" name="course[institution_id]" type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="editCourseGrade">Nota</label>
+            <input id="editCourseGrade" name="course[grade]" type="text" class="form-control" required>
+          </div>
         </div>
         <div class="modal-footer">
           <input type="hidden" name="_method" value="patch">
@@ -127,9 +151,11 @@
       $("#delete-form").attr('action', '/courses/' + id );
       $('#deleteCourseModal').modal('toggle');
     }
-    function editCourse(id,title) {
+    function editCourse(id,title, institution_id, grade) {
       $("#edit-form").attr('action', '/courses/' + id );
       $("#editCourseTitle").val( title );
+      $("#editCourseInstitutionId").val( institution_id );
+      $("#editCourseGrade").val( grade );
       $('#editCourseModal').modal('toggle');
     }
   </script>

@@ -2,6 +2,7 @@ class CreateInstitutions < ActiveRecord::Migration[5.2]
   def change
     create_table :institutions do |t|
       t.string :title, :null => false
+      t.decimal :grade, :null => false
 
       t.timestamps
     end
