@@ -13,20 +13,16 @@
     <table id="table" class="table table-striped table-hover">
       <thead>
         <tr>
-          <th data-sortable="true">#</th>
-          <th data-sortable="true">Identificação</th>
-          <th data-sortable="true">Curso</th>
-          <th data-sortable="true">Instituição</th>
-          <th data-sortable="true">Nota</th>
+          <th>Identificação</th>
+          <th>Curso</th>
+          <th>Instituição</th>
+          <th>Nota</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <% @students.each do |student| %>
         <tr>
-          <td>
-            <%= student.id %>
-          </td>
           <td>
             <%= student.student_id %>
           </td>
@@ -202,9 +198,9 @@
           var maxGradeFilter =  parseFloat( $('#maxGradeFilter').val() );
           var courseFilter =  parseInt( $('#courseFilter').val() );
           var institutionFilter =  parseInt( $('#institutionFilter').val() );
-          var course = parseInt( data[1] ) || 0;
-          var institution = parseInt( data[2] ) || 0;
-          var grade = parseFloat( data[3] ) || 0;
+          var course = parseInt( data[0] ) || 0;
+          var institution = parseInt( data[1] ) || 0;
+          var grade = parseFloat( data[2] ) || 0;
    
           if ( ( isNaN( minGradeFilter ) && isNaN( maxGradeFilter ) ) ||
                ( isNaN( minGradeFilter ) && grade <= maxGradeFilter ) ||

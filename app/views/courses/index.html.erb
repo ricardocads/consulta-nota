@@ -13,7 +13,6 @@
     <table id="table" class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>#</th>
           <th>Curso</th>
           <th>Instituição</th>
           <th>Nota</th>
@@ -23,9 +22,6 @@
       <tbody>
         <% @courses.each do |course| %>
         <tr>
-          <td>
-            <%= course.id %>
-          </td>
           <td>
             <%= course.title %>
           </td>
@@ -146,7 +142,7 @@
         </div>
         <div class="modal-body">          
           <div class="form-group">
-            <label for="editCourseTitle">Name</label>
+            <label for="editCourseTitle">Curso</label>
             <input id="editCourseTitle" name="course[title]" type="text" class="form-control" required>
           </div> 
           <div class="form-group">
@@ -188,9 +184,9 @@
           var maxGradeFilter =  parseFloat( $('#maxGradeFilter').val() );
           var courseFilter =  parseInt( $('#courseFilter').val() );
           var institutionFilter =  parseInt( $('#institutionFilter').val() );
-          var course = parseInt( data[1] ) || 0;
-          var institution = parseInt( data[2] ) || 0;
-          var grade = parseFloat( data[3] ) || 0;
+          var course = parseInt( data[0] ) || 0;
+          var institution = parseInt( data[1] ) || 0;
+          var grade = parseFloat( data[2] ) || 0;
    
           if ( ( isNaN( minGradeFilter ) && isNaN( maxGradeFilter ) ) ||
                ( isNaN( minGradeFilter ) && grade <= maxGradeFilter ) ||
