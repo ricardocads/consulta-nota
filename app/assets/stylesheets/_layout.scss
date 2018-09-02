@@ -81,3 +81,14 @@ html, body {
 .h-vh {
   height: 100vh;
 }
+
+.filters-form {
+  display: flex;
+  margin: 15px ;
+}
+.filters {
+  margin-top: 30px;
+  .filters-title {
+    margin-bottom: 25px;
+  }
+}

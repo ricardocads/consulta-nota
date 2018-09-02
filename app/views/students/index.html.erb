@@ -10,18 +10,14 @@
         </div>
       </div>
     </div>
-    <div class="form-group input-group">
-        <span class="input-group-addon searchbar-icon"><i class="material-icons">search</i></span>
-        <input name="consulta" id="inputSearch" placeholder="Consultar" type="text" class="form-control">
-    </div>
-    <table class="table table-striped table-hover">
+    <table id="table" class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Identificação</th>
-          <th>Curso</th>
-          <th>Instituição</th>
-          <th>Nota</th>
+          <th data-sortable="true">#</th>
+          <th data-sortable="true">Identificação</th>
+          <th data-sortable="true">Curso</th>
+          <th data-sortable="true">Instituição</th>
+          <th data-sortable="true">Nota</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -51,20 +47,44 @@
         <% end %>
       </tbody>
     </table>
-    <div class="clearfix">
-      <div class="hint-text">Mostrando <b>5</b> de <b>25</b> resultados</div>
-      <ul class="pagination">
-        <li class="page-item disabled"><a href="#">Anterior</a></li>
-        <li class="page-item"><a href="#" class="page-link">1</a></li>
-        <li class="page-item"><a href="#" class="page-link">2</a></li>
-        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-        <li class="page-item"><a href="#" class="page-link">4</a></li>
-        <li class="page-item"><a href="#" class="page-link">5</a></li>
-        <li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-      </ul>
+
+    <hr>
+
+    <div class="filters">
+      <div class="filters-title">
+        <h5>Filtros de pesquisa</h5>
+      </div>
+      <div class="filters-form">
+        <div class="col-6" style="text-align: center;">
+          <div>
+            <span>Curso:</span>
+            <br/>
+            <input id="courseFilter" type="text">
+          </div>
+          <div>
+            <span>Instituição:</span>
+            <br/>
+            <input id="institutionFilter" type="text">
+          </div>
+        </div>
+        <div class="col-6" style="text-align: center;">
+          <div>
+            <span>Nota Mínima:</span>
+            <br/>
+            <input id="minGradeFilter" type="text">
+          </div>
+          <div>
+            <span>Nota Máxima:</span>
+            <br/>
+            <input id="maxGradeFilter" type="text">
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
+
 
 <div id="addStudentModal" class="modal fade">
   <div class="modal-dialog">
@@ -175,8 +195,37 @@
     $("#editGrade").val( grade );
     $('#editStudentModal').modal('toggle');
   }
-</script>
 
-<script>
-  $('#inputSearch').quicksearch('table tbody tr');
+  $.fn.dataTable.ext.search.push(
+      function( settings, data, dataIndex ) {
+          var minGradeFilter =  parseFloat( $('#minGradeFilter').val() );
+          var maxGradeFilter =  parseFloat( $('#maxGradeFilter').val() );
+          var courseFilter =  parseInt( $('#courseFilter').val() );
+          var institutionFilter =  parseInt( $('#institutionFilter').val() );
+          var course = parseInt( data[1] ) || 0;
+          var institution = parseInt( data[2] ) || 0;
+          var grade = parseFloat( data[3] ) || 0;
+   
+          if ( ( isNaN( minGradeFilter ) && isNaN( maxGradeFilter ) ) ||
+               ( isNaN( minGradeFilter ) && grade <= maxGradeFilter ) ||
+               ( minGradeFilter <= grade   && isNaN( maxGradeFilter ) ) ||
+               ( minGradeFilter <= grade   && grade <= maxGradeFilter ) )
+          {
+              if ( courseFilter == course || isNaN(courseFilter) ) {
+                if ( institutionFilter == institution || isNaN(institutionFilter) ) {
+                  return true;
+                }
+              }
+          }
+          return false;
+      }
+  );
+   
+  $(document).ready(function() {
+      var table = $('#table').DataTable();
+      $('#minGradeFilter, #maxGradeFilter, #courseFilter, #institutionFilter').keyup( function() {
+          table.draw();
+      } );
+  } );
+
 </script>

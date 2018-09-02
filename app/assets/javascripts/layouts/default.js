@@ -1,21 +1,34 @@
-$('.dropdown.notifications ul a.nav-link').click(function (e) {
-  e.stopPropagation();
-  $(this).tab('show');
-});
-
-// Self Initialize DOM Factory Components
-domFactory.handler.autoInit()
-
-// Connect button(s) to drawer(s)
-var sidebarToggle = Array.prototype.slice.call(document.querySelectorAll('[data-toggle="sidebar"]'))
-
-sidebarToggle.forEach(function (toggle) {
-  toggle.addEventListener('click', function (e) {
-    var selector = e.currentTarget.getAttribute('data-target') || '#default-drawer'
-    var drawer = document.querySelector(selector)
-    if (drawer) {
-      drawer.mdkDrawer.toggle()
-    }
-  })
-})
-
+$(document).ready( function () {
+    $('#table').DataTable({
+      "language": {
+          "sEmptyTable": "Nenhum registro encontrado",
+              "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+              "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+              "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+              "sInfoPostFix": "",
+              "sInfoThousands": ".",
+              "sLengthMenu": "_MENU_ resultados por página",
+              "sLoadingRecords": "Carregando...",
+              "sProcessing": "Processando...",
+              "sZeroRecords": "Nenhum registro encontrado",
+              "sSearch": "Pesquisa Rápida",
+              "oPaginate": {
+                  "sNext": "Próximo",
+                  "sPrevious": "Anterior",
+                  "sFirst": "Primeiro",
+                  "sLast": "Último"
+              },
+              "oAria": {
+                  "sSortAscending": ": Ordenar colunas de forma ascendente",
+                  "sSortDescending": ": Ordenar colunas de forma descendente"
+              },
+              "select": {
+                  "rows": {
+                      "_": "Selecionado %d linhas",
+                      "0": "Nenhuma linha selecionada",
+                      "1": "Selecionado 1 linha"
+                  }
+          }
+      }
+    });
+} );

@@ -1,5 +1,5 @@
 //= require jquery
-//= require_tree .
+//= require_tree ./layouts
 
 //= require jquery/dist/jquery.min.js
 //= require popper.js/dist/umd/popper.js
@@ -7,4 +7,3 @@
 
 //= require dom-factory/dist/dom-factory.js
 //= require material-design-kit/dist/material-design-kit.js
-
