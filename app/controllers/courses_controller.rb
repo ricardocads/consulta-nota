@@ -7,20 +7,6 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
-  # GET /courses/1
-  # GET /courses/1.json
-  def show
-  end
-
-  # GET /courses/new
-  def new
-    @course = Course.new
-  end
-
-  # GET /courses/1/edit
-  def edit
-  end
-
   # POST /courses
   # POST /courses.json
   def create

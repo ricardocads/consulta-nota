@@ -7,20 +7,6 @@ class StudentsController < ApplicationController
     @students = Student.all
   end
 
-  # GET /students/1
-  # GET /students/1.json
-  def show
-  end
-
-  # GET /students/new
-  def new
-    @student = Student.new
-  end
-
-  # GET /students/1/edit
-  def edit
-  end
-
   # POST /students
   # POST /students.json
   def create

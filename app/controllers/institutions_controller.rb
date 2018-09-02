@@ -7,20 +7,6 @@ class InstitutionsController < ApplicationController
     @institutions = Institution.all
   end
 
-  # GET /institutions/1
-  # GET /institutions/1.json
-  def show
-  end
-
-  # GET /institutions/new
-  def new
-    @institution = Institution.new
-  end
-
-  # GET /institutions/1/edit
-  def edit
-  end
-
   # POST /institutions
   # POST /institutions.json
   def create

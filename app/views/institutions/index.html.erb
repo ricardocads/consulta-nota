@@ -5,9 +5,11 @@
         <div class="col-sm-6">
           <h2><b>Instituições</b></h2>
         </div>
-        <div class="col-sm-6 group-btn-title">
-          <a href="#addInstitutionModal" class="btn btn-success btn-title" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Criar</span></a>
-        </div>
+        <% if can? :create, Institution %>
+          <div class="col-sm-6 group-btn-title">
+            <a href="#addInstitutionModal" class="btn btn-success btn-title" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Criar</span></a>
+          </div>
+        <% end %>
       </div>
     </div>
     <table id="table" class="table table-striped table-hover">
