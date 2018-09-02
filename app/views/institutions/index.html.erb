@@ -17,7 +17,9 @@
         <tr>
           <th>Instituição</th>
           <th>Nota</th>
+          <% if can? :create, Institution %>
           <th>Ações</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -29,10 +31,12 @@
           <td>
             <%= institution.grade %>
           </td>
+          <% if can? :create, Institution %>
           <td>
             <a class="edit" data-toggle="modal" onclick="editInstitution(<%= institution.id %>,'<%= institution.title %>', <%= institution.grade %>)"><i class="material-icons" data-toggle="tooltip" title="Editar" data-original-title="Editar">&#xE254;</i></a>
             <a class="delete" data-toggle="modal" onclick="deleteInstitution(<%= institution.id %>)"><i class="material-icons" data-toggle="tooltip" title="Deletar" data-original-title="Deletar">&#xE872;</i></a>
           </td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>

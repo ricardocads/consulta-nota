@@ -18,7 +18,9 @@
           <th>Curso</th>
           <th>Instituição</th>
           <th>Nota</th>
+          <% if can? :create, Course %>
           <th>Ações</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -33,10 +35,12 @@
           <td>
             <%= course.grade %>
           </td>
+          <% if can? :create, Course %>
           <td>
             <a class="edit" data-toggle="modal" onclick="editCourse(<%= course.id %>,'<%= course.title %>', <%= course.institution_id %>, <%= course.grade %>)"><i class="material-icons" data-toggle="tooltip" title="Editar" data-original-title="Editar">&#xE254;</i></a>
             <a class="delete" data-toggle="modal" onclick="deleteCourse(<%= course.id %>)"><i class="material-icons" data-toggle="tooltip" title="Deletar" data-original-title="Deletar">&#xE872;</i></a>
           </td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>
