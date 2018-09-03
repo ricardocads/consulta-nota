@@ -1,6 +1,6 @@
 #consulta-nota
 
-This is an example project to demonstrate CRUD concepts. The main tools used were: Ruby on Rails, SQLite3, HTML, CSS, JQuerry. This application consists of providing a list of the performances of students, courses and institutions related to the ENADE (National Student Performance Examination - Brazil).
+This is an example project to demonstrate CRUD concepts. The main tools used were: Ruby on Rails, PostgresSQL, HTML, CSS, JQuerry. This application consists of providing a list of the performances of students, courses and institutions related to the ENADE (National Student Performance Examination - Brazil).
 
 To use the application you will need to login to the application check if you are a user or an administrator.
 
@@ -17,7 +17,7 @@ Examples of accounts already registered:
 	password: 123123
 
 How to run?
-Assuming you have pre-installed Ruby 2.3.1 and Rails 5.2.1, Node.js 4.2.6 you need to run the following commands:
+Assuming you have pre-installed Ruby 2.3.1 and Rails 5.2.1, Node.js 4.2.6, PostgresSQL 9.5.14 you need to run the following commands:
 
 Installing dependences:
 
@@ -26,6 +26,7 @@ Installing dependences:
 
 Runing migrations and seeds
 
+	rake db:create
 	rake db:migrate
 	rake db:seed
 
