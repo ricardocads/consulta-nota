@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2018_09_02_203714) do
     t.decimal "grade", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_courses_on_title", unique: true
   end
 
   create_table "institutions", force: :cascade do |t|

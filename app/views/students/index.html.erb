@@ -41,7 +41,7 @@
           </td>
           <% if can? :create, Student %>
           <td>
-            <a class="edit" data-toggle="modal" onclick="editStudent(<%= student.id %>,'<%= student.student_id %>', <%= student.course_id %>, <%= student.institution_id %>, <%= student.grade %>)"><i class="material-icons" data-toggle="tooltip" title="Editar" data-original-title="Editar">&#xE254;</i></a>
+            <a class="edit" data-toggle="modal" onclick="editStudent(<%= student.id %>,'<%= student.student_id %>', '<%= student.course_id %>', '<%= student.institution_id %>', <%= student.grade %>)"><i class="material-icons" data-toggle="tooltip" title="Editar" data-original-title="Editar">&#xE254;</i></a>
             <a class="delete" data-toggle="modal" onclick="deleteStudent(<%= student.id %>)"><i class="material-icons" data-toggle="tooltip" title="Deletar" data-original-title="Deletar">&#xE872;</i></a>
           </td>
           <% end %>
@@ -204,9 +204,9 @@
           var maxGradeFilter =  parseFloat( $('#maxGradeFilter').val() );
           var courseFilter =   $('#courseFilter').val();
           var institutionFilter =  $('#institutionFilter').val();
-          var course = data[1];
-          var institution = data[2];
-          var grade = parseFloat( data[0] ) || 0;
+          var course = data[2];
+          var institution = data[3];
+          var grade = parseFloat( data[1] ) || 0;
    
           if ( ( isNaN( minGradeFilter ) && isNaN( maxGradeFilter ) ) ||
                ( isNaN( minGradeFilter ) && grade <= maxGradeFilter ) ||

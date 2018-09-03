@@ -9,15 +9,15 @@
 puts "Seeding Data Base..."
 
 for i in 0..5
-	Institution.create!(title: "Instituição##{i}", grade: i)
+	Institution.create!(title: "Universidade#{i}", grade: i)
 end
 
 for i in 0..5
-	Course.create!(title: "Curso##{i}", institution_id: "Instituição##{i}", grade: i)
+	Course.create!(title: "Curso#{i}", institution_id: "Universidade#{i}", grade: i)
 end
 
 for i in 0..5
-	Student.create!(student_id: "Aluno##{i}", course_id: "Curso##{i}", institution_id: "Instituição##{i}", grade: i)
+	Student.create!(student_id: "Aluno#{i}", course_id: "Curso#{i}", institution_id: "Universidade#{i}", grade: i)
 end
 
 User.create!([
