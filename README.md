@@ -33,5 +33,5 @@ Next, you need only run the server:
 
 	rails s
 
-And finally, open a browser with the following url:
+And finally open a browser with the following url:
 http://localhost:3000
