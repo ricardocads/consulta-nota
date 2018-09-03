@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_09_02_203714) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "courses", force: :cascade do |t|
     t.string "title", null: false
     t.string "institution_id", null: false
