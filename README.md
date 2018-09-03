@@ -17,7 +17,7 @@ Examples of accounts already registered:
 	password: 123123
 
 How to run?
-Assuming you have pre-installed Ruby 2.3.1 and Rails 5.2.1, Node.js 6.14.4, PostgresSQL 9.5.14 you need to run the following commands:
+Assuming you have pre-installed Ruby >= 2.3.1 and Rails >= 5.2.1, Node.js >= 6.14.4, PostgresSQL >= 9.5.14 you need to run the following commands:
 
 Installing dependences:
 
