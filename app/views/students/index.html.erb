@@ -16,9 +16,9 @@
       <thead>
         <tr>
           <th>Identificação</th>
+          <th>Nota</th>
           <th>Curso</th>
           <th>Instituição</th>
-          <th>Nota</th>
           <% if can? :create, Student %>
           <th>Ações</th>
           <% end %>
@@ -31,13 +31,13 @@
             <%= student.student_id %>
           </td>
           <td>
+            <%= student.grade %>
+          </td>
+          <td>
             <%= student.course_id %>
           </td>
           <td>
             <%= student.institution_id %>
-          </td>
-          <td>
-            <%= student.grade %>
           </td>
           <% if can? :create, Student %>
           <td>
@@ -100,6 +100,10 @@
           <div class="form-group">
             <label for="addStudentId">Identificação</label>
             <input id="addStudentId" name="student[student_id]" type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="addGrade">Nota</label>
+            <input id="addGrade" name="student[grade]" type="text" class="form-control" required>
           </div>  
           <div class="form-group">
             <label for="addCourseId">Curso</label>
@@ -108,10 +112,6 @@
           <div class="form-group">
             <label for="addInstitutionId">Instituição</label>
             <input id="addInstitutionId" name="student[institution_id]" type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="addGrade">Nota</label>
-            <input id="addGrade" name="student[grade]" type="text" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -161,16 +161,16 @@
             <input id="editStudentId" name="student[student_id]" type="text" class="form-control" required>
           </div>  
           <div class="form-group">
+            <label for="editGrade">Nota</label>
+            <input id="editGrade" name="student[grade]" type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
             <label for="editCourseId">Curso</label>
             <input id="editCourseId" name="student[course_id]" type="text" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="editInstitutionId">Instituição</label>
             <input id="editInstitutionId" name="student[institution_id]" type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="editGrade">Nota</label>
-            <input id="editGrade" name="student[grade]" type="text" class="form-control" required>
           </div>
         </div>        
         <div class="modal-footer">
@@ -202,19 +202,19 @@
       function( settings, data, dataIndex ) {
           var minGradeFilter =  parseFloat( $('#minGradeFilter').val() );
           var maxGradeFilter =  parseFloat( $('#maxGradeFilter').val() );
-          var courseFilter =  parseInt( $('#courseFilter').val() );
-          var institutionFilter =  parseInt( $('#institutionFilter').val() );
-          var course = parseInt( data[0] ) || 0;
-          var institution = parseInt( data[1] ) || 0;
-          var grade = parseFloat( data[2] ) || 0;
+          var courseFilter =   $('#courseFilter').val();
+          var institutionFilter =  $('#institutionFilter').val();
+          var course = data[1];
+          var institution = data[2];
+          var grade = parseFloat( data[0] ) || 0;
    
           if ( ( isNaN( minGradeFilter ) && isNaN( maxGradeFilter ) ) ||
                ( isNaN( minGradeFilter ) && grade <= maxGradeFilter ) ||
                ( minGradeFilter <= grade   && isNaN( maxGradeFilter ) ) ||
                ( minGradeFilter <= grade   && grade <= maxGradeFilter ) )
           {
-              if ( courseFilter == course || isNaN(courseFilter) ) {
-                if ( institutionFilter == institution || isNaN(institutionFilter) ) {
+              if ( courseFilter == course || courseFilter == '' ) {
+                if ( institutionFilter == institution || institutionFilter == '' ) {
                   return true;
                 }
               }

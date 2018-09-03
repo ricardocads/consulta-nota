@@ -170,8 +170,8 @@
       function( settings, data, dataIndex ) {
           var minGradeFilter =  parseFloat( $('#minGradeFilter').val() );
           var maxGradeFilter =  parseFloat( $('#maxGradeFilter').val() );
-          var institutionFilter =  parseInt( $('#institutionFilter').val() );
-          var institution = parseInt( data[0] ) || 0;
+          var institutionFilter =  ( $('#institutionFilter').val() );
+          var institution = ( data[0] ) ;
           var grade = parseFloat( data[1] ) || 0;
    
           if ( ( isNaN( minGradeFilter ) && isNaN( maxGradeFilter ) ) ||
@@ -179,7 +179,7 @@
                ( minGradeFilter <= grade   && isNaN( maxGradeFilter ) ) ||
                ( minGradeFilter <= grade   && grade <= maxGradeFilter ) )
           {
-            if ( institutionFilter == institution || isNaN(institutionFilter) ) {
+            if ( institutionFilter == institution || institutionFilter == '' ) {
               return true;
             }
           }

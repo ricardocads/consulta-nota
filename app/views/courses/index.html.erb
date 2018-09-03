@@ -16,8 +16,8 @@
       <thead>
         <tr>
           <th>Curso</th>
+          <th>Nota</th> 
           <th>Instituição</th>
-          <th>Nota</th>
           <% if can? :create, Course %>
           <th>Ações</th>
           <% end %>
@@ -30,10 +30,10 @@
             <%= course.title %>
           </td>
           <td>
-            <%= course.institution_id %>
+            <%= course.grade %>
           </td>
           <td>
-            <%= course.grade %>
+            <%= course.institution_id %>
           </td>
           <% if can? :create, Course %>
           <td>
@@ -93,12 +93,12 @@
             <input id="addCourseTitle" name="course[title]" type="text" class="form-control" required>
           </div>
           <div class="form-group">
-            <label for="addCourseInstitutionId">Instituição</label>
-            <input id="addCourseInstitutionId" name="course[institution_id]" type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
             <label for="addCourseGrade">Nota</label>
             <input id="addCourseGrade" name="course[grade]" type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="addCourseInstitutionId">Instituição</label>
+            <input id="addCourseInstitutionId" name="course[institution_id]" type="text" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -146,12 +146,12 @@
             <input id="editCourseTitle" name="course[title]" type="text" class="form-control" required>
           </div>
           <div class="form-group">
-            <label for="editCourseInstitutionId">Instituição</label>
-            <input id="editCourseInstitutionId" name="course[institution_id]" type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
             <label for="editCourseGrade">Nota</label>
             <input id="editCourseGrade" name="course[grade]" type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="editCourseInstitutionId">Instituição</label>
+            <input id="editCourseInstitutionId" name="course[institution_id]" type="text" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -181,19 +181,19 @@
       function( settings, data, dataIndex ) {
           var minGradeFilter =  parseFloat( $('#minGradeFilter').val() );
           var maxGradeFilter =  parseFloat( $('#maxGradeFilter').val() );
-          var courseFilter =  parseInt( $('#courseFilter').val() );
-          var institutionFilter =  parseInt( $('#institutionFilter').val() );
-          var course = parseInt( data[0] ) || 0;
-          var institution = parseInt( data[1] ) || 0;
-          var grade = parseFloat( data[2] ) || 0;
+          var courseFilter =  $('#courseFilter').val();
+          var institutionFilter =  $('#institutionFilter').val();
+          var course = data[0];
+          var institution = data[2];
+          var grade = parseFloat( data[1] ) || 0;
    
           if ( ( isNaN( minGradeFilter ) && isNaN( maxGradeFilter ) ) ||
                ( isNaN( minGradeFilter ) && grade <= maxGradeFilter ) ||
                ( minGradeFilter <= grade   && isNaN( maxGradeFilter ) ) ||
                ( minGradeFilter <= grade   && grade <= maxGradeFilter ) )
           {
-              if ( courseFilter == course || isNaN(courseFilter) ) {
-                if ( institutionFilter == institution || isNaN(institutionFilter) ) {
+              if ( courseFilter == course || courseFilter == '') {
+                if ( institutionFilter == institution || institutionFilter == '' ) {
                   return true;
                 }
               }
